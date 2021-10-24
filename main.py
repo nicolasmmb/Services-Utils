@@ -49,8 +49,3 @@ def root():
         'error': None,
         'response': 'Hello, Utils Directory'
     }
-
-
-# image_response = requests.get('https://cdn.pixabay.com/photo/2014/01/22/19/44/flower-field-250016_960_720.jpg', stream=True)
-# hash = blurhash.encode(image_response.raw, x_components=5, y_components=4)
-# print(hash)

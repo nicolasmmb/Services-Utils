@@ -22,11 +22,13 @@ async def generate_blurhash(request: BlurhashModel):
         response = requests.get(request.url, stream=True, timeout=request.timeout)
         print('Headers:' + str(response.headers))
         print('Status Code: ' + str(response.status_code))
+        bh = blurhash.encode(response.raw, x_components=request.x_comp, y_components=request.y_comp)
+        print('Blurhash: ' + bh)
 
         if response.status_code == 200:
             return {
                 'error': False,
-                'response': blurhash.encode(response.raw, x_components=request.x_comp, y_components=request.y_comp),
+                'response': bh,
                 'log': None
             }
         else:

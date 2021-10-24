@@ -21,7 +21,6 @@ async def generate_blurhash(request: BlurhashModel):
     try:
         response = requests.get(request.url, stream=True, timeout=request.timeout)
         bh = blurhash.encode(response.raw, x_components=request.x_comp, y_components=request.y_comp)
-        print('\33[3J\33[H\33[2J')
         print('Blurhash: ' + bh)
 
         if response.status_code == 200:
@@ -42,9 +41,6 @@ async def generate_blurhash(request: BlurhashModel):
             'response': None,
             'log': str(excp),
         }
-    finally:
-        response.close()
-        del bh, response
 
 
 @app.get("/")

@@ -9,8 +9,8 @@ from typing import Optional
 class BlurhashModel(BaseModel):
     url: str
     timeout: Optional[int] = 15
-    x_comp: Optional[int] = 5
-    y_comp: Optional[int] = 4
+    x_comp: Optional[int] = 3
+    y_comp: Optional[int] = 2
 
 
 app = FastAPI()
@@ -21,6 +21,7 @@ async def generate_blurhash(request: BlurhashModel):
     try:
         response = requests.get(request.url, stream=True, timeout=request.timeout)
         bh = blurhash.encode(response.raw, x_components=request.x_comp, y_components=request.y_comp)
+        print('\33[3J\33[H\33[2J')
         print('Blurhash: ' + bh)
 
         if response.status_code == 200:

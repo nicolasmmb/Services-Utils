@@ -20,10 +20,9 @@ app = FastAPI()
 async def generate_blurhash(request: BlurhashModel):
     try:
         response = requests.get(request.url, stream=True, timeout=request.timeout)
-        print(response.headers)
-        print(response.content)
-        print(response.status_code)
-        print(request)
+        print('Headers:' + str(response.headers))
+        print('Status Code: ' + str(response.status_code))
+
         if response.status_code == 200:
             return {
                 'error': False,

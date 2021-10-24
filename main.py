@@ -24,6 +24,13 @@ async def generate_blurhash(request: BlurhashModel):
             return {
                 'error': False,
                 'response': blurhash.encode(response.raw, x_components=request.x_comp, y_components=request.y_comp),
+                'log': None
+            }
+        else:
+            return {
+                'error': True,
+                'response': None,
+                'log': f'Error: {response.raw}',
             }
     except Exception as e:
         return {
@@ -34,7 +41,8 @@ async def generate_blurhash(request: BlurhashModel):
         }
     return {
         'error': True,
-        'response': None
+        'response': None,
+        'log': 'Error: Unknown'
     }
 
 

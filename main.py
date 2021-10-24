@@ -35,18 +35,15 @@ async def generate_blurhash(request: BlurhashModel):
                 'response': None,
                 'log': f'Error: {response.request}',
             }
-    except Exception as e:
+    except Exception as excp:
         return {
             'error': True,
             'response': None,
-            'log': str(e),
-
+            'log': str(excp),
         }
-    return {
-        'error': True,
-        'response': None,
-        'log': 'Error: Unknown'
-    }
+    finally:
+        response.close()
+        del bh, response
 
 
 @app.get("/")
